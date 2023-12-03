@@ -1,9 +1,6 @@
 import codecs
 import encodings.cp866 as cp866
 
-from functools import lru_cache
-
-from .common import get_codec, get_incremental_encoder, get_incremental_decoder, get_stream_writer, get_stream_reader
 
 # Codec APIs
 class Codec(cp866.Codec):
