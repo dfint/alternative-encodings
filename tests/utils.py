@@ -3,8 +3,11 @@ from typing import Protocol
 
 
 class CodecModule(Protocol):
-    def register(): ...
-    def unregister(): ...
+    def register():
+        ...
+
+    def unregister():
+        ...
 
 
 @contextlib.contextmanager

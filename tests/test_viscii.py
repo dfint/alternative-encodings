@@ -1,8 +1,9 @@
 import codecs
 
 import pytest
-import alternative_encodings.viscii as viscii
 from utils import codec
+
+import alternative_encodings.viscii as viscii
 
 
 @pytest.fixture(scope="module", autouse=True)
