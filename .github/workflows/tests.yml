@@ -40,7 +40,7 @@ jobs:
         cache-dependency-path: poetry.lock
 
     - name: Install dependencies
-      run: poetry install
+      run: poetry install --with coveralls
 
     - name: Lint with flake8
       run: |
