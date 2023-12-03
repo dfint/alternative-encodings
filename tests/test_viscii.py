@@ -28,9 +28,9 @@ source_data = (
 encoded = bytes(range(0x80, 0x100)) + b"\x02\x05\x06\x14\x19\x1e"
 
 
-def test_viscii_encode():
+def test_encode():
     assert codecs.encode(source_data, "viscii") == encoded
 
 
-def test_viscii_decode():
+def test_decode():
     assert codecs.decode(encoded, "viscii") == source_data
