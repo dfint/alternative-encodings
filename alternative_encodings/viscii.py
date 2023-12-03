@@ -40,25 +40,21 @@ StreamReader = get_stream_reader(Codec)
 
 # encodings module API
 
+codec = Codec()
 
-@lru_cache()
-def getregentry():
-    return codecs.CodecInfo(
-        name="viscii",
-        encode=Codec().encode,
-        decode=Codec().decode,
-        incrementalencoder=IncrementalEncoder,
-        incrementaldecoder=IncrementalDecoder,
-        streamreader=StreamReader,
-        streamwriter=StreamWriter,
-    )
+
+regentry = codecs.CodecInfo(
+    name="viscii",
+    encode=codec.encode,
+    decode=codec.decode,
+    incrementalencoder=IncrementalEncoder,
+    incrementaldecoder=IncrementalDecoder,
+)
 
 
 def search_function(encoding):
-    entry = getregentry()
-
-    if entry.name == encoding:
-        return entry
+    if regentry.name == encoding:
+        return regentry
 
     return None
 
