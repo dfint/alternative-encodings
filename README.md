@@ -4,7 +4,7 @@
 
 Implemented encodings:
 
-- [x] [viscii][1]
+- [x] [viscii][1] - Vietnamese DOS encoding
 - [x] cp866i - modified [cp866][2] Python encoding, which works correctly with Belarusian and Ukrainian "і" letter
 
 Ideas:
