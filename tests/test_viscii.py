@@ -1,14 +1,14 @@
 import codecs
 
 import pytest
-from utils import codec
+from utils import register_codec
 
 import alternative_encodings.viscii as viscii
 
 
 @pytest.fixture(scope="module", autouse=True)
-def register_codec():
-    with codec(viscii):
+def register_codec_fixture():
+    with register_codec(viscii):
         yield
 
 

@@ -1,14 +1,14 @@
 import codecs
 
 import pytest
-from utils import codec
+from utils import register_codec
 
 import alternative_encodings.cp866i as cp866i
 
 
 @pytest.fixture(scope="module", autouse=True)
-def register_codec():
-    with codec(cp866i):
+def register_codec_fixture():
+    with register_codec(cp866i):
         yield
 
 

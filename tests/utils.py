@@ -11,7 +11,7 @@ class CodecModule(Protocol):
 
 
 @contextlib.contextmanager
-def codec(codec: CodecModule):
+def register_codec(codec: CodecModule):
     try:
         codec.register()
         yield
