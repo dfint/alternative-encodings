@@ -11,8 +11,8 @@ from .common import (
 # Decoding Table
 
 decoding_table = (
-    "\x00\x01Ẳ\x03\x04ẴẪ\x07\x08\t\n\x0b\x0c\r\x0e\x0f"
-    "\x10\x11\x12\x13Ỷ\x15\x16\x17\x18Ỹ\x1a\x1b\x1c\x1dỴ\x1f"
+    "\x00☺☻♥♦♣♠●◘○◙♂♀♪♫☼"
+    "▶◀↕‼¶§▬↨↑↓→←∟↔▲▼"
     " !\"#$%&'()*+,-./"
     "0123456789:;<=>?"
     "@ABCDEFGHIJKLMNO"
@@ -26,7 +26,7 @@ decoding_table = (
     "└┴┬├─┼ãÃ╚╔╩╦╠═╬¤"
     "ðÐÊËÈ€ÍÎÏ┘┌█▄ŠÌ▀"
     "ÓßÔÒõÕµþÞÚÛÙýÝ¯Ž"
-    " ± Ÿ¶§÷ž°š·¹³²■\xa0"
+    "\xad±\xf2Ÿ¶§÷ž°š·¹³²■\xa0"
 )
 
 # Encoding table

@@ -18,8 +18,9 @@ source_data = (
 )
 
 encoded = (
-    b"J'aime l'id\x82e que le plus grand des Sex-symbols new-yorkais, "
-    b"n'\x82tait qu'un chien dans un foyer de Brazzaville"
+    b"J'aime l'id\x82e que le plus grand des Sex-symbols "
+    b"new-yorkais, n'\x82tait qu'un chien dans un foyer d"
+    b"e Brazzaville"
 )
 
 
