@@ -1,12 +1,6 @@
 import codecs
 
-from .common import (
-    get_codec,
-    get_incremental_decoder,
-    get_incremental_encoder,
-    get_stream_reader,
-    get_stream_writer,
-)
+from .common import get_codec, get_incremental_decoder, get_incremental_encoder, get_stream_reader, get_stream_writer
 
 # Decoding Table
 

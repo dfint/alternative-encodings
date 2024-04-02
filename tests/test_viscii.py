@@ -3,7 +3,7 @@ import codecs
 import pytest
 from utils import register_codec
 
-import alternative_encodings.viscii as viscii
+from alternative_encodings import viscii
 
 
 @pytest.fixture(scope="module", autouse=True)

@@ -3,7 +3,7 @@ import codecs
 import pytest
 from utils import register_codec
 
-import alternative_encodings.cp866i as cp866i
+from alternative_encodings import cp866i
 
 
 @pytest.fixture(scope="module", autouse=True)

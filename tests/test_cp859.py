@@ -3,7 +3,7 @@ import codecs
 import pytest
 from utils import register_codec
 
-import alternative_encodings.cp859 as cp859
+from alternative_encodings import cp859
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -24,6 +24,12 @@ encoded = (
 )
 
 
-def test_encode():
+@pytest.mark.parametrize("source_data, encoded",
+    [
+        (source_data, encoded),
+        ('\r\n', b'\r\n'),
+    ]
+)
+def test_encode(source_data, encoded):
     assert codecs.encode(source_data, "cp859") == encoded
     assert codecs.decode(encoded, "cp859") == source_data
