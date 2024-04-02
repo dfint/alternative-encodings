@@ -1,17 +1,11 @@
 import codecs
 
-from .common import (
-    get_codec,
-    get_incremental_decoder,
-    get_incremental_encoder,
-    get_stream_reader,
-    get_stream_writer,
-)
+from .common import get_codec, get_incremental_decoder, get_incremental_encoder, get_stream_reader, get_stream_writer
 
 # Decoding Table
 
 decoding_table = (
-    "\x00☺☻♥♦♣♠●◘○◙♂♀♪♫☼"
+    "\x00\x01Ẳ\x03\x04ẴẪ\x07\x08\t\n\x0b\x0c\r\x0e\x0f"
     "▶◀↕‼¶§▬↨↑↓→←∟↔▲▼"
     " !\"#$%&'()*+,-./"
     "0123456789:;<=>?"
