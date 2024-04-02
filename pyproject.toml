@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "alternative-encodings"
-version = "0.2.2"
+version = "0.2.3"
 description = ""
 authors = ["insolor <insolor@gmail.com>"]
 license = "MIT"
