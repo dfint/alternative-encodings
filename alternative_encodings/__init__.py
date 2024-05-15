@@ -1,7 +1,7 @@
-import cp859
-import cp866i
-import romaji
-import viscii
+from . import cp859
+from . import cp866i
+from . import romaji
+from . import viscii
 
 
 def register_all():
