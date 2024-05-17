@@ -5,7 +5,7 @@ from typing import Iterator
 import encodings.cp437 as cp437
 import cutlet
 
-katsu = cutlet.Cutlet()
+katsu = cutlet.Cutlet(use_foreign_spelling=False)
 
 
 def is_translatable(s: str):
