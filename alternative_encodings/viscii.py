@@ -58,7 +58,7 @@ regentry = codecs.CodecInfo(
 )
 
 
-def search_function(encoding):
+def search_function(encoding: str) -> codecs.CodecInfo | None:
     if regentry.name == encoding:
         return regentry
 

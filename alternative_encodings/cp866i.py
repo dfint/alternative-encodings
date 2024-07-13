@@ -5,15 +5,15 @@ from encodings import cp866
 
 # Codec APIs
 class Codec(cp866.Codec):
-    def encode(self, input, errors="strict"):
-        input = input.replace("і", "i").replace("І", "I")
-        return super().encode(input, errors)
+    def encode(self, input_string: str, errors: str = "strict") -> bytes:
+        input_string = input_string.replace("і", "i").replace("І", "I")  # noqa: RUF001
+        return super().encode(input_string, errors)
 
 
 class IncrementalEncoder(cp866.IncrementalEncoder):
-    def encode(self, input, final=False):
-        input = input.replace("і", "i").replace("І", "I")
-        return super().encode(input, final)
+    def encode(self, input_string: str, final: bool = False) -> bytes:  # noqa: FBT001, FBT002
+        input_string = input_string.replace("і", "i").replace("І", "I")  # noqa: RUF001
+        return super().encode(input_string, final)
 
 
 IncrementalDecoder = cp866.IncrementalDecoder
@@ -31,7 +31,7 @@ regentry = codecs.CodecInfo(
 )
 
 
-def search_function(encoding):
+def search_function(encoding: str) -> codecs.CodecInfo | None:
     if regentry.name == encoding:
         return regentry
 

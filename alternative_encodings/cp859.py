@@ -21,7 +21,7 @@ decoding_table = (
     "`abcdefghijklmno"
     "pqrstuvwxyz{|}~\x7f"
     "ÇüéâäàåçêëèïîìÄÅ"
-    "ÉæÆôöòûùÿÖÜø£Ø×ƒ"
+    "ÉæÆôöòûùÿÖÜø£Ø×ƒ"  # noqa: RUF001
     "áíóúñÑªº¿®¬œŒ¡«»"
     "░▒▓│┤ÁÂÀ©╣║╗╝¢¥┐"
     "└┴┬├─┼ãÃ╚╔╩╦╠═╬¤"
@@ -58,7 +58,7 @@ regentry = codecs.CodecInfo(
 )
 
 
-def search_function(encoding):
+def search_function(encoding: str) -> codecs.CodecInfo | None:
     if regentry.name == encoding:
         return regentry
 

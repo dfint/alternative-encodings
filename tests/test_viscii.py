@@ -1,4 +1,5 @@
 import codecs
+from collections.abc import Generator
 
 import pytest
 from utils import register_codec
@@ -7,7 +8,7 @@ from alternative_encodings import viscii
 
 
 @pytest.fixture(scope="module", autouse=True)
-def register_codec_fixture():
+def _register_codec_fixture() -> Generator[None, None, None]:
     with register_codec(viscii):
         yield
 

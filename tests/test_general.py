@@ -17,7 +17,7 @@ codecs_pairs = [
         "\r\n",
     ],
 )
-def test_general(string):
+def test_general(string: str):
     for codec_name, codec in codecs_pairs:
         with register_codec(codec):
             encoded = codecs.encode(string, encoding=codec_name)
