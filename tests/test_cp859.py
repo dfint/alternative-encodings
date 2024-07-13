@@ -3,14 +3,14 @@ from collections.abc import Generator
 
 import pytest
 
-from alternative_encodings import cp859
+from alternative_encodings.cp859 import codec
 
 from .utils import register_codec
 
 
 @pytest.fixture(scope="module", autouse=True)
 def _register_codec_fixture() -> Generator[None, None, None]:
-    with register_codec(cp859):
+    with register_codec(codec):
         yield
 
 

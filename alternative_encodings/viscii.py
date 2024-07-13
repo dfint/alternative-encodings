@@ -49,7 +49,7 @@ StreamReader = get_stream_reader(Codec)
 codec = Codec()
 
 
-regentry = codecs.CodecInfo(
+codec_info = codecs.CodecInfo(
     name="viscii",
     encode=codec.encode,
     decode=codec.decode,
@@ -59,8 +59,8 @@ regentry = codecs.CodecInfo(
 
 
 def search_function(encoding: str) -> codecs.CodecInfo | None:
-    if regentry.name == encoding:
-        return regentry
+    if codec_info.name == encoding:
+        return codec_info
 
     return None
 

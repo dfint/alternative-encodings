@@ -46,29 +46,31 @@ StreamReader = get_stream_reader(Codec)
 
 # encodings module API
 
-codec = Codec()
+_codec = Codec()
 
-
-regentry = codecs.CodecInfo(
+codec_info = codecs.CodecInfo(
     name="cp859",
-    encode=codec.encode,
-    decode=codec.decode,
+    encode=_codec.encode,
+    decode=_codec.decode,
     incrementalencoder=IncrementalEncoder,
     incrementaldecoder=IncrementalDecoder,
 )
 
 
-def search_function(encoding: str) -> codecs.CodecInfo | None:
-    if regentry.name == encoding:
-        return regentry
+class Cp859Codec:
+    @staticmethod
+    def search_function(encoding: str) -> codecs.CodecInfo | None:
+        if codec_info.name == encoding:
+            return codec_info
 
-    return None
+        return None
+
+    def register(self) -> None:
+        codecs.register(self.search_function)
+
+    def unregister(self) -> None:
+        with contextlib.suppress(AttributeError):
+            codecs.unregister(self.search_function)
 
 
-def register() -> None:
-    codecs.register(search_function)
-
-
-def unregister() -> None:
-    with contextlib.suppress(AttributeError):
-        codecs.unregister(search_function)
+codec = Cp859Codec()
