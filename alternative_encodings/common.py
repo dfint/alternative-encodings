@@ -1,11 +1,11 @@
 import codecs
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from _codecs import _EncodingMap  # noqa: TCH004
+    from _codecs import _EncodingMap
 
 
-def get_codec(encoding_table: dict[int, int] | _EncodingMap, decoding_table: str) -> type[codecs.Codec]:
+def get_codec(encoding_table: Union[dict[int, int], "_EncodingMap"], decoding_table: str) -> type[codecs.Codec]:
     class Codec(codecs.Codec):
         def encode(self, input_string: str, errors: str = "strict") -> tuple[bytes, int]:
             return codecs.charmap_encode(input_string, errors, encoding_table)
@@ -16,7 +16,7 @@ def get_codec(encoding_table: dict[int, int] | _EncodingMap, decoding_table: str
     return Codec
 
 
-def get_incremental_encoder(encoding_table: dict[int, int] | _EncodingMap) -> type[codecs.IncrementalEncoder]:
+def get_incremental_encoder(encoding_table: Union[dict[int, int], "_EncodingMap"]) -> type[codecs.IncrementalEncoder]:
     class IncrementalEncoder(codecs.IncrementalEncoder):
         def encode(self, input_string: str, _final: bool = False) -> bytes:  # noqa: FBT001, FBT002
             return codecs.charmap_encode(input_string, self.errors, encoding_table)[0]

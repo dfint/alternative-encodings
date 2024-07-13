@@ -2,9 +2,10 @@ import codecs
 from collections.abc import Generator
 
 import pytest
-from utils import register_codec
 
 from alternative_encodings import cp866i
+
+from .utils import register_codec
 
 
 @pytest.fixture(scope="module", autouse=True)

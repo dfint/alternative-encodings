@@ -1,9 +1,10 @@
 import codecs
 
 import pytest
-from utils import register_codec
 
 from alternative_encodings import cp859, cp866i, viscii
+
+from .utils import register_codec
 
 codecs_pairs = [
     ("cp859", cp859),
