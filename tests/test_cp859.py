@@ -27,8 +27,8 @@ encoded = (
 @pytest.mark.parametrize("source_data, encoded",
     [
         (source_data, encoded),
-        ('\r\n', b'\r\n'),
-    ]
+        ("\r\n", b"\r\n"),
+    ],
 )
 def test_encode(source_data, encoded):
     assert codecs.encode(source_data, "cp859") == encoded

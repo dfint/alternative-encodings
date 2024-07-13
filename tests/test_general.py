@@ -15,7 +15,7 @@ codecs_pairs = [
 @pytest.mark.parametrize("string",
     [
         "\r\n",
-    ]
+    ],
 )
 def test_general(string):
     for codec_name, codec in codecs_pairs:

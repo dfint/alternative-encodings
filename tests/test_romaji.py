@@ -26,9 +26,9 @@ encoded = b"""
 @pytest.mark.parametrize("source_data, encoded",
     [
         (source_data, encoded),
-        ('\r\n', b'\r\n'),
-        ('吾輩は猫である。 名前はまだ無い。', b'Wagahai wa neko de aru. Namae wa mada nai.')
-    ]
+        ("\r\n", b"\r\n"),
+        ("吾輩は猫である。 名前はまだ無い。", b"Wagahai wa neko de aru. Namae wa mada nai."),
+    ],
 )
 def test_encode(source_data, encoded):
     assert codecs.encode(source_data, "romaji") == encoded

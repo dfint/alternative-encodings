@@ -1,8 +1,8 @@
 import codecs
 import re
+from encodings import cp437
 from typing import Iterator
 
-import encodings.cp437 as cp437
 import cutlet
 
 katsu = cutlet.Cutlet(use_foreign_spelling=False)

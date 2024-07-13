@@ -1,5 +1,5 @@
 import codecs
-import encodings.cp866 as cp866
+from encodings import cp866
 
 
 # Codec APIs
