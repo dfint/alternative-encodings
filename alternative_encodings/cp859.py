@@ -1,6 +1,13 @@
 import codecs
+import contextlib
 
-from .common import get_codec, get_incremental_decoder, get_incremental_encoder, get_stream_reader, get_stream_writer
+from .common import (
+    get_codec,
+    get_incremental_decoder,
+    get_incremental_encoder,
+    get_stream_reader,
+    get_stream_writer,
+)
 
 # Decoding Table
 
@@ -14,7 +21,7 @@ decoding_table = (
     "`abcdefghijklmno"
     "pqrstuvwxyz{|}~\x7f"
     "ÇüéâäàåçêëèïîìÄÅ"
-    "ÉæÆôöòûùÿÖÜø£Ø×ƒ"
+    "ÉæÆôöòûùÿÖÜø£Ø×ƒ"  # noqa: RUF001
     "áíóúñÑªº¿®¬œŒ¡«»"
     "░▒▓│┤ÁÂÀ©╣║╗╝¢¥┐"
     "└┴┬├─┼ãÃ╚╔╩╦╠═╬¤"
@@ -51,19 +58,17 @@ regentry = codecs.CodecInfo(
 )
 
 
-def search_function(encoding):
+def search_function(encoding: str) -> codecs.CodecInfo | None:
     if regentry.name == encoding:
         return regentry
 
     return None
 
 
-def register():
+def register() -> None:
     codecs.register(search_function)
 
 
-def unregister():
-    try:
+def unregister() -> None:
+    with contextlib.suppress(AttributeError):
         codecs.unregister(search_function)
-    except AttributeError:
-        pass

@@ -1,14 +1,15 @@
 import codecs
+import contextlib
 import re
-from typing import Iterator
+from collections.abc import Iterator
+from encodings import cp437
 
-import encodings.cp437 as cp437
 import cutlet
 
 katsu = cutlet.Cutlet(use_foreign_spelling=False)
 
 
-def is_translatable(s: str):
+def is_translatable(s: str) -> bool:
     return katsu.romaji(s).strip() != s.strip()
 
 
@@ -19,8 +20,8 @@ def translate_with_spaces(s: str) -> Iterator[str]:
     yield end
 
 
-def iter_translate(input: str) -> Iterator[str]:
-    for line_with_ending in input.splitlines(keepends=True):
+def iter_translate(input_string: str) -> Iterator[str]:
+    for line_with_ending in input_string.splitlines(keepends=True):
         line, end = re.search(r"^(.*?)([\r\n]*)$", line_with_ending, flags=re.MULTILINE + re.DOTALL).groups()
         if line:
             parts = re.split(r"(\b[\w \,]+\b)", line)
@@ -30,18 +31,18 @@ def iter_translate(input: str) -> Iterator[str]:
         yield end
 
 
-def encode(input: str) -> str:
-    return "".join(iter_translate(input))
+def encode(input_string: str) -> str:
+    return "".join(iter_translate(input_string))
 
 
 class Codec(cp437.Codec):
-    def encode(self, input, errors="strict"):
-        return super().encode(encode(input), errors)
+    def encode(self, input_string: str, errors: str = "strict") -> bytes:
+        return super().encode(encode(input_string), errors)
 
 
 class IncrementalEncoder(cp437.IncrementalEncoder):
-    def encode(self, input, final=False):
-        return super().encode(encode(input), final)
+    def encode(self, input_string: str, final: bool = False) -> bytes:  # noqa: FBT001, FBT002
+        return super().encode(encode(input_string), final)
 
 
 IncrementalDecoder = cp437.IncrementalDecoder
@@ -58,19 +59,17 @@ regentry = codecs.CodecInfo(
 )
 
 
-def search_function(encoding):
+def search_function(encoding: str) -> codecs.CodecInfo | None:
     if regentry.name == encoding:
         return regentry
 
     return None
 
 
-def register():
+def register() -> None:
     codecs.register(search_function)
 
 
-def unregister():
-    try:
+def unregister() -> None:
+    with contextlib.suppress(AttributeError):
         codecs.unregister(search_function)
-    except AttributeError:
-        pass

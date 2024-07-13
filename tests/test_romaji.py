@@ -1,13 +1,15 @@
 import codecs
+from collections.abc import Generator
 
 import pytest
-from utils import register_codec
 
 from alternative_encodings import romaji
 
+from .utils import register_codec
+
 
 @pytest.fixture(scope="module", autouse=True)
-def register_codec_fixture():
+def _register_codec_fixture() -> Generator[None, None, None]:
     with register_codec(romaji):
         yield
 
@@ -23,12 +25,12 @@ encoded = b"""
 """
 
 
-@pytest.mark.parametrize("source_data, encoded",
+@pytest.mark.parametrize(("source_data", "encoded"),
     [
         (source_data, encoded),
-        ('\r\n', b'\r\n'),
-        ('吾輩は猫である。 名前はまだ無い。', b'Wagahai wa neko de aru. Namae wa mada nai.')
-    ]
+        ("\r\n", b"\r\n"),
+        ("吾輩は猫である。 名前はまだ無い。", b"Wagahai wa neko de aru. Namae wa mada nai."),
+    ],
 )
-def test_encode(source_data, encoded):
+def test_encode(source_data: str, encoded: bytes):
     assert codecs.encode(source_data, "romaji") == encoded
