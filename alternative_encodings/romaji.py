@@ -1,7 +1,7 @@
 import codecs
 import re
+from collections.abc import Iterator
 from encodings import cp437
-from typing import Iterator
 
 import cutlet
 
