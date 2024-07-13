@@ -1,4 +1,5 @@
 import codecs
+import contextlib
 
 from .common import (
     get_codec,
@@ -64,12 +65,10 @@ def search_function(encoding):
     return None
 
 
-def register():
+def register() -> None:
     codecs.register(search_function)
 
 
-def unregister():
-    try:
+def unregister() -> None:
+    with contextlib.suppress(AttributeError):
         codecs.unregister(search_function)
-    except AttributeError:
-        pass

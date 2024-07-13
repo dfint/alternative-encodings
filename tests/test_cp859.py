@@ -1,9 +1,9 @@
 import codecs
 
 import pytest
-from utils import register_codec
 
 from alternative_encodings import cp859
+from utils import register_codec
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -24,7 +24,7 @@ encoded = (
 )
 
 
-@pytest.mark.parametrize("source_data, encoded",
+@pytest.mark.parametrize(("source_data", "encoded"),
     [
         (source_data, encoded),
         ("\r\n", b"\r\n"),
