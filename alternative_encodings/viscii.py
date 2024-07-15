@@ -1,7 +1,7 @@
 import codecs
-import contextlib
 
 from .common import (
+    CodecBase,
     get_codec,
     get_incremental_decoder,
     get_incremental_encoder,
@@ -46,29 +46,20 @@ StreamReader = get_stream_reader(Codec)
 
 # encodings module API
 
-codec = Codec()
+_codec = Codec()
 
 
-codec_info = codecs.CodecInfo(
-    name="viscii",
-    encode=codec.encode,
-    decode=codec.decode,
-    incrementalencoder=IncrementalEncoder,
-    incrementaldecoder=IncrementalDecoder,
-)
+class VisciiCodec(CodecBase):
+    codec_info = codecs.CodecInfo(
+        name="viscii",
+        encode=_codec.encode,
+        decode=_codec.decode,
+        incrementalencoder=IncrementalEncoder,
+        incrementaldecoder=IncrementalDecoder,
+    )
+
+    def get_codec_info(self) -> codecs.CodecInfo:
+        return self.codec_info
 
 
-def search_function(encoding: str) -> codecs.CodecInfo | None:
-    if codec_info.name == encoding:
-        return codec_info
-
-    return None
-
-
-def register() -> None:
-    codecs.register(search_function)
-
-
-def unregister() -> None:
-    with contextlib.suppress(AttributeError):
-        codecs.unregister(search_function)
+codec = VisciiCodec()

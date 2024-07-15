@@ -3,20 +3,19 @@ from collections.abc import Generator
 
 import pytest
 
-from alternative_encodings.cp859 import codec
+from alternative_encodings import cp859
 
 from .utils import register_codec
 
 
 @pytest.fixture(scope="module", autouse=True)
 def _register_codec_fixture() -> Generator[None, None, None]:
-    with register_codec(codec):
+    with register_codec(cp859.codec):
         yield
 
 
 source_data = (
-    "J'aime l'idée que le plus grand des Sex-symbols new-yorkais, "
-    "n'était qu'un chien dans un foyer de Brazzaville"
+    "J'aime l'idée que le plus grand des Sex-symbols new-yorkais, n'était qu'un chien dans un foyer de Brazzaville"
 )
 
 encoded = (
@@ -26,7 +25,8 @@ encoded = (
 )
 
 
-@pytest.mark.parametrize(("source_data", "encoded"),
+@pytest.mark.parametrize(
+    ("source_data", "encoded"),
     [
         (source_data, encoded),
         ("\r\n", b"\r\n"),

@@ -10,7 +10,7 @@ from .utils import register_codec
 
 @pytest.fixture(scope="module", autouse=True)
 def _register_codec_fixture() -> Generator[None, None, None]:
-    with register_codec(cp866i):
+    with register_codec(cp866i.codec):
         yield
 
 

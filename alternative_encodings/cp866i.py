@@ -1,6 +1,7 @@
 import codecs
-import contextlib
 from encodings import cp866
+
+from alternative_encodings.common import CodecBase
 
 
 # Codec APIs
@@ -19,29 +20,20 @@ class IncrementalEncoder(cp866.IncrementalEncoder):
 IncrementalDecoder = cp866.IncrementalDecoder
 
 # encodings module API
-codec = Codec()
+_codec = Codec()
 
 
-codec_info = codecs.CodecInfo(
-    name="cp866i",
-    encode=codec.encode,
-    decode=codec.decode,
-    incrementalencoder=IncrementalEncoder,
-    incrementaldecoder=IncrementalDecoder,
-)
+class Cp866iCodec(CodecBase):
+    codec_info = codecs.CodecInfo(
+        name="cp866i",
+        encode=_codec.encode,
+        decode=_codec.decode,
+        incrementalencoder=IncrementalEncoder,
+        incrementaldecoder=IncrementalDecoder,
+    )
+
+    def get_codec_info(self) -> codecs.CodecInfo:
+        return self.codec_info
 
 
-def search_function(encoding: str) -> codecs.CodecInfo | None:
-    if codec_info.name == encoding:
-        return codec_info
-
-    return None
-
-
-def register() -> None:
-    codecs.register(search_function)
-
-
-def unregister() -> None:
-    with contextlib.suppress(AttributeError):
-        codecs.unregister(search_function)
+codec = Cp866iCodec()

@@ -2,18 +2,20 @@ import codecs
 
 import pytest
 
-from alternative_encodings import cp859, cp866i, viscii
+from alternative_encodings import cp859, cp866i, romaji, viscii
 
 from .utils import register_codec
 
 codecs_pairs = [
-    ("cp859", cp859),
-    ("cp866i", cp866i),
-    ("viscii", viscii),
+    ("cp859", cp859.codec),
+    ("cp866i", cp866i.codec),
+    ("romaji", romaji.codec),
+    ("viscii", viscii.codec),
 ]
 
 
-@pytest.mark.parametrize("string",
+@pytest.mark.parametrize(
+    "string",
     [
         "\r\n",
     ],

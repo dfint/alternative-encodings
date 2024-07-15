@@ -1,7 +1,7 @@
 import codecs
-import contextlib
 
 from .common import (
+    CodecBase,
     get_codec,
     get_incremental_decoder,
     get_incremental_encoder,
@@ -48,29 +48,18 @@ StreamReader = get_stream_reader(Codec)
 
 _codec = Codec()
 
-codec_info = codecs.CodecInfo(
-    name="cp859",
-    encode=_codec.encode,
-    decode=_codec.decode,
-    incrementalencoder=IncrementalEncoder,
-    incrementaldecoder=IncrementalDecoder,
-)
 
+class Cp859Codec(CodecBase):
+    codec_info = codecs.CodecInfo(
+        name="cp859",
+        encode=_codec.encode,
+        decode=_codec.decode,
+        incrementalencoder=IncrementalEncoder,
+        incrementaldecoder=IncrementalDecoder,
+    )
 
-class Cp859Codec:
-    @staticmethod
-    def search_function(encoding: str) -> codecs.CodecInfo | None:
-        if codec_info.name == encoding:
-            return codec_info
-
-        return None
-
-    def register(self) -> None:
-        codecs.register(self.search_function)
-
-    def unregister(self) -> None:
-        with contextlib.suppress(AttributeError):
-            codecs.unregister(self.search_function)
+    def get_codec_info(self) -> codecs.CodecInfo:
+        return self.codec_info
 
 
 codec = Cp859Codec()
