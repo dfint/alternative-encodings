@@ -1,4 +1,6 @@
 import codecs
+import contextlib
+from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
@@ -44,3 +46,23 @@ def get_stream_reader(codec: type[codecs.Codec]) -> type[codecs.Codec, codecs.St
         pass
 
     return StreamReader
+
+
+class CodecBase(ABC):
+    @abstractmethod
+    def get_codec_info(self) -> codecs.CodecInfo:
+        raise NotImplementedError
+
+    def search_function(self, encoding: str) -> codecs.CodecInfo | None:
+        codec_info = self.get_codec_info()
+        if codec_info.name == encoding:
+            return codec_info
+
+        return None
+
+    def register(self) -> None:
+        codecs.register(self.search_function)
+
+    def unregister(self) -> None:
+        with contextlib.suppress(AttributeError):
+            codecs.unregister(self.search_function)

@@ -10,7 +10,7 @@ from .utils import register_codec
 
 @pytest.fixture(scope="module", autouse=True)
 def _register_codec_fixture() -> Generator[None, None, None]:
-    with register_codec(romaji):
+    with register_codec(romaji.codec):
         yield
 
 
@@ -25,7 +25,8 @@ encoded = b"""
 """
 
 
-@pytest.mark.parametrize(("source_data", "encoded"),
+@pytest.mark.parametrize(
+    ("source_data", "encoded"),
     [
         (source_data, encoded),
         ("\r\n", b"\r\n"),

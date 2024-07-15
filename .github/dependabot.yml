@@ -9,7 +9,6 @@ updates:
         patterns:
           - "pytest*"
           - "ruff"
-          - "refurb"
 
   - package-ecosystem: "github-actions"
     directory: "/"

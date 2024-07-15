@@ -1,10 +1,11 @@
 import codecs
-import contextlib
 import re
 from collections.abc import Iterator
 from encodings import cp437
 
 import cutlet
+
+from alternative_encodings.common import CodecBase
 
 katsu = cutlet.Cutlet(use_foreign_spelling=False)
 
@@ -48,28 +49,20 @@ class IncrementalEncoder(cp437.IncrementalEncoder):
 IncrementalDecoder = cp437.IncrementalDecoder
 
 # encodings module API
-codec = Codec()
-
-regentry = codecs.CodecInfo(
-    name="romaji",
-    encode=codec.encode,
-    decode=codec.decode,
-    incrementalencoder=IncrementalEncoder,
-    incrementaldecoder=IncrementalDecoder,
-)
+_codec = Codec()
 
 
-def search_function(encoding: str) -> codecs.CodecInfo | None:
-    if regentry.name == encoding:
-        return regentry
+class RomajiCodec(CodecBase):
+    codec_info = codecs.CodecInfo(
+        name="romaji",
+        encode=_codec.encode,
+        decode=_codec.decode,
+        incrementalencoder=IncrementalEncoder,
+        incrementaldecoder=IncrementalDecoder,
+    )
 
-    return None
+    def get_codec_info(self) -> codecs.CodecInfo:
+        return self.codec_info
 
 
-def register() -> None:
-    codecs.register(search_function)
-
-
-def unregister() -> None:
-    with contextlib.suppress(AttributeError):
-        codecs.unregister(search_function)
+codec = RomajiCodec()
