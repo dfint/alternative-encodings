@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-cutlet = "^0.4.0"
+cutlet = "^0.5.0"
 fugashi = {extras = ["unidic-lite"], version = "^1.4.0"}
 
 [tool.poetry.group.dev.dependencies]
