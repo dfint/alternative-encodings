@@ -14,7 +14,7 @@ fugashi = {extras = ["unidic-lite"], version = "^1.5.1"}
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 pytest-cov = "^6.2.1"
-ruff = "^0.12.1"
+ruff = "^0.12.7"
 
 [build-system]
 requires = ["poetry-core"]
